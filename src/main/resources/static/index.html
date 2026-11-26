@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">S</span>
+            <span>StudentHub</span>
+        </div>
+
+        <p class="menu-title">MENU</p>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#students" class="nav-link">
+                <span>♙</span> Students
+            </a>
+
+            <a href="#add-student" class="nav-link">
+                <span>＋</span> Add Student
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="themeBtn" class="theme-btn">
+                ◐ Toggle Theme
+            </button>
+
+            <p>Student Management</p>
+            <small>Admin Panel</small>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h2>Dashboard</h2>
+                <p>Manage your students efficiently</p>
+            </div>
+
+            <button class="primary-btn"
+                    onclick="openForm()">
+                + Add Student
+            </button>
+        </header>
+
+        <!-- Statistics -->
+        <section id="dashboard" class="stats">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">♙</div>
+                <div>
+                    <p>Total Students</p>
+                    <h2 id="totalStudents">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">▣</div>
+                <div>
+                    <p>Total Courses</p>
+                    <h2 id="totalCourses">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div>
+                    <p>Database Records</p>
+                    <h2 id="totalRecords">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Student Form -->
+        <section id="add-student" class="panel form-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3 id="formTitle">Add New Student</h3>
+                    <p>Enter student information below</p>
+                </div>
+
+                <button class="close-btn"
+                        onclick="closeForm()">
+                    ✕
+                </button>
+            </div>
+
+            <form id="studentForm">
+
+                <input type="hidden" id="studentId">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Student Name</label>
+                        <input type="text"
+                               id="name"
+                               placeholder="Enter full name"
+                               required>
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email"
+                               id="email"
+                               placeholder="Enter email"
+                               required>
+                    </div>
+
+                    <div class="field">
+                        <label>Course</label>
+                        <input type="text"
+                               id="course"
+                               placeholder="e.g. Java, CSE, BCA"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button type="button"
+                            class="secondary-btn"
+                            onclick="closeForm()">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="primary-btn"
+                            id="submitBtn">
+                        Add Student
+                    </button>
+
+                </div>
+
+            </form>
+        </section>
+
+        <!-- Students -->
+        <section id="students" class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h3>Students List</h3>
+                    <p>Manage all registered students</p>
+                </div>
+
+                <button class="secondary-btn"
+                        onclick="exportCSV()">
+                    ↓ Export CSV
+                </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="toolbar">
+
+                <input type="search"
+                       id="searchInput"
+                       placeholder="Search students..."
+                       oninput="applyFilters()">
+
+                <select id="courseFilter"
+                        onchange="applyFilters()">
+                    <option value="all">All Courses</option>
+                </select>
+
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="emptyMessage" class="empty-message">
+                No students found.
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+
+                <span id="pageInfo">
+                    Page 1
+                </span>
+
+                <div>
+                    <button class="secondary-btn"
+                            id="prevBtn"
+                            onclick="previousPage()">
+                        Previous
+                    </button>
+
+                    <button class="secondary-btn"
+                            id="nextBtn"
+                            onclick="nextPage()">
+                        Next
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer>
+            StudentHub • Student Management System
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+

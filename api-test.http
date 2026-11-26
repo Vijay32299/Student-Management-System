@@ -1,0 +1,12 @@
+### Get all students
+GET http://localhost:8080/students
+
+### Add student
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+  "name": "Vijay",
+  "email": "vijay@example.com",
+  "course": "Java"
+}
